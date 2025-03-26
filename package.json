@@ -2,11 +2,18 @@
   "name": "bomberquizapi",
   "version": "1.0.0",
   "description": "API REST para o sistema BomberQuiz que utiliza perguntas e respostas para acelerar o aprendizado de matérias exigidas no Teste de Avaliação Profissional (TAP) do Corpo de Bombeiros Militar do Estado de Goiás - CBMGO",
+  "author": {
+    "name": "André David dos Santos",
+    "email": "andredavid1@gmail.com"
+  },
+  "license": "ISC",
+  "packageManager": "pnpm@10.6.5",
   "main": "build/app/index.js",
   "scripts": {
-    "build": "prisma generate && rm -rf build && tsc",
-    "dev": "ts-node-dev src/app/index.ts",
-    "start": "node .",
+    "prisma:generate": "prisma generate",
+    "build": "pnpm prisma:generate && tsc && cp -r prisma dist/",
+    "dev": "ts-node-dev -r tsconfig-paths/register src/app/index.ts",
+    "start": "node -r module-alias/register .",
     "lint": "eslint --fix",
     "test": "jest",
     "test:verbose": "jest --verbose --silent=false",
@@ -16,12 +23,9 @@
     "test:coverage": "jest --coverage",
     "prepare": "husky"
   },
-  "author": {
-    "name": "André David dos Santos",
-    "email": "andredavid1@gmail.com"
+  "_moduleAliases": {
+    "@": "build"
   },
-  "license": "ISC",
-  "packageManager": "pnpm@10.6.5",
   "dependencies": {
     "@fastify/cors": "^11.0.0",
     "@fastify/sensible": "^6.0.3",
@@ -32,6 +36,7 @@
     "fastify": "^5.2.1",
     "jsdom": "^26.0.0",
     "libphonenumber-js": "^1.12.6",
+    "module-alias": "^2.2.3",
     "password-validator": "^5.3.0",
     "validator": "^13.12.0"
   },
@@ -45,6 +50,7 @@
     "@types/jest": "^29.5.14",
     "@types/jsdom": "^21.1.7",
     "@types/jsonwebtoken": "^9.0.9",
+    "@types/module-alias": "^2.0.4",
     "@types/node": "^22.13.11",
     "@types/validator": "^13.12.2",
     "eslint": "^9.23.0",
@@ -60,6 +66,7 @@
     "prettier": "^3.5.3",
     "prisma": "^6.5.0",
     "ts-jest": "^29.3.0",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.2",
