@@ -6,9 +6,6 @@
  * module aliases and starts the server
  */
 
-// Register path aliases first, before any other imports
-import "./register-aliases";
-
 // Then import other modules
 import { startServer } from "./server";
 
