@@ -1,9 +1,12 @@
 {
   "name": "bomberquizapi",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API REST para o sistema BomberQuiz que utiliza perguntas e respostas para acelerar o aprendizado de matérias exigidas no Teste de Avaliação Profissional (TAP) do Corpo de Bombeiros Militar do Estado de Goiás - CBMGO",
+  "main": "build/app/index.js",
   "scripts": {
+    "build": "prisma generate && rm -rf build && tsc",
+    "dev": "ts-node-dev --respawn --transpile-only src/app/index.ts",
+    "start": "node .",
     "lint": "eslint --fix",
     "test": "jest",
     "test:verbose": "jest --verbose --silent=false",
@@ -11,16 +14,12 @@
     "test:integration": "jest --watch -c jest-integration-config.ts",
     "test:staged": "jest --onlyChanged",
     "test:coverage": "jest --coverage",
-    "prepare": "husky",
-    "dev": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register --respawn --transpile-only src/main/index.ts",
-    "build": "prisma generate && rm -rf dist && tsc",
-    "start": "NODE_ENV=production node dist/main/index.js"
+    "prepare": "husky"
   },
-  "_moduleAliases": {
-    "@": "dist"
+  "author": {
+    "name": "André David dos Santos",
+    "email": "andredavid1@gmail.com"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.6.5",
   "dependencies": {
