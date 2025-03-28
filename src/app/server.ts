@@ -80,6 +80,7 @@ export const startServer = async (port = 3333): Promise<void> => {
   try {
     const server = await setupServer();
     await server.listen({ port, host: "0.0.0.0" });
+    console.log(`Server running at http://localhost:${port}`);
   } catch (err) {
     console.error(err);
     process.exit(1);

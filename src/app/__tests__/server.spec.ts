@@ -96,7 +96,7 @@ describe("Server", () => {
 
       // Verificar se server.listen foi chamado com a porta correta
       expect(app.listen).toHaveBeenCalledWith({
-        port: 3000,
+        port: 3333,
         host: "0.0.0.0",
       });
     });
@@ -138,7 +138,7 @@ describe("Server", () => {
 
       // Verificar se console.log foi chamado com a mensagem de sucesso
       expect(consoleLogSpy).toHaveBeenCalledWith(
-        "Server running at http://localhost:3000",
+        "Server running at http://localhost:3333",
       );
     });
 
