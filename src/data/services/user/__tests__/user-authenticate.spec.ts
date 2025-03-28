@@ -9,7 +9,7 @@ import {
   USER_DEFAULT_AVATAR_URL,
   USER_DEFAULT_ROLE,
 } from "@/domain/entities";
-import { InvalidParamError } from "@/domain/errors";
+import { InvalidCredentialsError } from "@/domain/errors";
 import { HashProvider, JwtProvider, LoggerProvider } from "@/domain/providers";
 import { UserRepository } from "@/domain/repositories";
 
@@ -168,16 +168,16 @@ describe("UserAuthenticateService", () => {
 
     /**
      * @description Testa o cenário onde o usuário não é encontrado
-     * Verifica se o serviço lança um InvalidParamError quando o email não existe
+     * Verifica se o serviço lança um InvalidCredentialsError quando o email não existe
      */
-    it("should throw InvalidParamError when user is not found", async () => {
+    it("should throw InvalidCredentialsError when user is not found", async () => {
       // Arrange
       mockUserRepository.findByEmail.mockResolvedValue(null);
 
       // Act & Assert
       await expect(
         userAuthenticateService.authenticate(mockAuthData),
-      ).rejects.toThrow(InvalidParamError);
+      ).rejects.toThrow(InvalidCredentialsError);
 
       expect(mockLoggerProvider.error).toHaveBeenCalled();
       expect(mockHashProvider.compare).not.toHaveBeenCalled();
@@ -186,9 +186,9 @@ describe("UserAuthenticateService", () => {
 
     /**
      * @description Testa o cenário onde a senha está incorreta
-     * Verifica se o serviço lança um InvalidParamError quando a senha não corresponde
+     * Verifica se o serviço lança um InvalidCredentialsError quando a senha não corresponde
      */
-    it("should throw InvalidParamError when password is incorrect", async () => {
+    it("should throw InvalidCredentialsError when password is incorrect", async () => {
       // Arrange
       mockUserRepository.findByEmail.mockResolvedValue(mockUser);
       mockHashProvider.compare.mockResolvedValue(false);
@@ -196,7 +196,7 @@ describe("UserAuthenticateService", () => {
       // Act & Assert
       await expect(
         userAuthenticateService.authenticate(mockAuthData),
-      ).rejects.toThrow(InvalidParamError);
+      ).rejects.toThrow(InvalidCredentialsError);
 
       expect(mockLoggerProvider.error).toHaveBeenCalled();
       expect(mockHashProvider.compare).toHaveBeenCalled();

@@ -33,7 +33,7 @@ import { startServer } from "./server";
  * });
  */
 export async function main(): Promise<void> {
-  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3333;
   try {
     await startServer(PORT);
   } catch (error) {

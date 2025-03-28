@@ -6,7 +6,6 @@ import {
 } from "@/infra/adapters";
 import { makeAuthMiddleware } from "@/infra/factories";
 import {
-  makeUserAuthenticateController,
   makeUserCreateController,
   makeUserListController,
 } from "@/infra/factories/controllers";
@@ -51,10 +50,6 @@ import {
 export const setupUserRoutes = (app: FastifyInstance): void => {
   // Public routes
   app.post("/api/users", fastifyRouteAdapter(makeUserCreateController()));
-  app.post(
-    "/api/auth/login",
-    fastifyRouteAdapter(makeUserAuthenticateController()),
-  );
 
   // Protected routes
   app.get(

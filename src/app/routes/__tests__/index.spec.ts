@@ -1,11 +1,13 @@
 // src/main/routes/__tests__/index.spec.ts
 import { FastifyInstance } from "fastify";
 
+import { setupAuthRoutes } from "../auth-routes";
 import { setupRoutes } from "../index";
 import { setupUserRoutes } from "../user-routes";
 
 // Mock das dependências
 jest.mock("../user-routes");
+jest.mock("../auth-routes");
 
 describe("Setup Routes", () => {
   let mockApp: FastifyInstance;
@@ -29,6 +31,14 @@ describe("Setup Routes", () => {
 
     // Verificar se a rota health foi registrada
     expect(mockApp.get).toHaveBeenCalledWith("/health", expect.any(Function));
+  });
+
+  it("deve chamar setupAuthRoutes com a instância do app", () => {
+    // Executar a função setupRoutes
+    setupRoutes(mockApp);
+
+    // Verificar se setupUserRoutes foi chamado com a instância correta do app
+    expect(setupAuthRoutes).toHaveBeenCalledWith(mockApp);
   });
 
   it("deve chamar setupUserRoutes com a instância do app", () => {

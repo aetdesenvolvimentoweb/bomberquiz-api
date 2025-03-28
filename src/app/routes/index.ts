@@ -7,6 +7,7 @@
 
 import { FastifyInstance } from "fastify";
 
+import { setupAuthRoutes } from "./auth-routes";
 import { setupUserRoutes } from "./user-routes";
 
 /**
@@ -41,6 +42,7 @@ import { setupUserRoutes } from "./user-routes";
  */
 export const setupRoutes = (app: FastifyInstance): void => {
   // Set up user-related routes
+  setupAuthRoutes(app);
   setupUserRoutes(app);
 
   // Add other domain-specific routes as needed

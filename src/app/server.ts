@@ -65,22 +65,21 @@ export const setupServer = async (): Promise<
  *
  * @async
  * @function startServer
- * @param {number} [port=3000] - The port number to listen on
+ * @param {number} [port=3333] - The port number to listen on
  * @returns {Promise<void>} A promise that resolves when the server has started
  * @throws {Error} Logs any errors and exits the process on startup failure
  *
  * @example
- * // Start server on default port (3000)
+ * // Start server on default port (3333)
  * await startServer();
  *
  * // Start server on specific port
  * await startServer(8080);
  */
-export const startServer = async (port = 3000): Promise<void> => {
+export const startServer = async (port = 3333): Promise<void> => {
   try {
     const server = await setupServer();
     await server.listen({ port, host: "0.0.0.0" });
-    console.log(`Server running at http://localhost:${port}`);
   } catch (err) {
     console.error(err);
     process.exit(1);

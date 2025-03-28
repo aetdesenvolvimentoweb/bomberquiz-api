@@ -34,6 +34,8 @@
 export * from "./application-error";
 /** Erro para parâmetros obrigatórios não informados (HTTP 400) */
 export * from "./missing-param-error";
+/** Erro para credentiais de autenticação inválidas (HTTP 401) */
+export * from "./invalid-credentials-error";
 /** Erro para parâmetros com valores inválidos (HTTP 400) */
 export * from "./invalid-param-error";
 /** Erro para recursos duplicados (HTTP 409) */

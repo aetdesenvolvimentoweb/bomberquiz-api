@@ -1,4 +1,4 @@
-import { InvalidParamError } from "@/domain/errors";
+import { InvalidCredentialsError } from "@/domain/errors";
 import {
   HashProvider,
   JwtPayload,
@@ -79,7 +79,7 @@ export class UserAuthenticateService implements UserAuthenticateUseCase {
       // Buscar usuário pelo email
       const user = await userRepository.findByEmail(data.email);
       if (!user) {
-        throw new InvalidParamError("email/senha", "credenciais inválidas");
+        throw new InvalidCredentialsError();
       }
 
       // Verificar senha
@@ -89,7 +89,7 @@ export class UserAuthenticateService implements UserAuthenticateUseCase {
       );
 
       if (!passwordValid) {
-        throw new InvalidParamError("email/senha", "credenciais inválidas");
+        throw new InvalidCredentialsError();
       }
 
       // Gerar token JWT

@@ -1,7 +1,7 @@
 import { InMemoryUserRepository } from "@/data/repositories";
 import { UserAuthenticateService } from "@/data/services";
 import { UserCreateData } from "@/domain/entities";
-import { InvalidParamError, MissingParamError } from "@/domain/errors";
+import { InvalidCredentialsError, MissingParamError } from "@/domain/errors";
 import { HashProvider, JwtProvider, LoggerProvider } from "@/domain/providers";
 import { UserRepository } from "@/domain/repositories";
 import { UserAuthenticationResult } from "@/domain/usecases";
@@ -81,7 +81,7 @@ describe("UserAuthenticateController", () => {
     );
   });
 
-  it("should return 400 if no email is provided", async () => {
+  it("should return 401 if no email is provided", async () => {
     // Arrange
     const { sut } = makeSut();
     const httpRequest: HttpRequest = {
@@ -94,13 +94,13 @@ describe("UserAuthenticateController", () => {
     const httpResponse = await sut.handle(httpRequest);
 
     // Assert
-    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.statusCode).toBe(401);
     expect(httpResponse.body.errorMessage).toEqual(
-      new InvalidParamError("Email/senha. Credenciais inválidas").message,
+      new InvalidCredentialsError().message,
     );
   });
 
-  it("should return 400 if no password is provided", async () => {
+  it("should return 401 if no password is provided", async () => {
     // Arrange
     const { sut } = makeSut();
     const httpRequest: HttpRequest = {
@@ -113,13 +113,13 @@ describe("UserAuthenticateController", () => {
     const httpResponse = await sut.handle(httpRequest);
 
     // Assert
-    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.statusCode).toBe(401);
     expect(httpResponse.body.errorMessage).toEqual(
-      new InvalidParamError("Email/senha. Credenciais inválidas").message,
+      new InvalidCredentialsError().message,
     );
   });
 
-  it("should return 400 if password does not match", async () => {
+  it("should return 401 if password does not match", async () => {
     // Arrange
     const { sut, userRepository, hashProvider } = makeSut();
 
@@ -147,9 +147,9 @@ describe("UserAuthenticateController", () => {
     const httpResponse = await sut.handle(httpRequest);
 
     // Assert
-    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.statusCode).toBe(401);
     expect(httpResponse.body.errorMessage).toEqual(
-      new InvalidParamError("Email/senha. Credenciais inválidas").message,
+      new InvalidCredentialsError().message,
     );
   });
 
