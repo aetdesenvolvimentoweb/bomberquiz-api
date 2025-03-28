@@ -1,8 +1,6 @@
+import { UserAuthenticateService } from "@/data/services";
 import { MissingParamError } from "@/domain/errors";
-import {
-  UserAuthenticateUseCase,
-  UserAuthenticationData,
-} from "@/domain/usecases/user/user-authenticate-usecase";
+import { UserAuthenticationData } from "@/domain/usecases/user/user-authenticate-usecase";
 import { handleError, ok } from "@/presentation/helpers";
 import {
   Controller,
@@ -16,7 +14,7 @@ import {
  */
 interface UserAuthenticateControllerProps {
   /** Caso de uso para autenticação de usuários */
-  userAuthenticateUseCase: UserAuthenticateUseCase;
+  userAuthenticateService: UserAuthenticateService;
 }
 
 /**
@@ -57,7 +55,7 @@ export class UserAuthenticateController
   public readonly handle = async (
     request: HttpRequest<UserAuthenticationData>,
   ): Promise<HttpResponse> => {
-    const { userAuthenticateUseCase } = this.props;
+    const { userAuthenticateService } = this.props;
 
     try {
       if (!request.body) {
@@ -66,7 +64,7 @@ export class UserAuthenticateController
 
       const { email, password } = request.body;
 
-      const authResult = await userAuthenticateUseCase.authenticate({
+      const authResult = await userAuthenticateService.authenticate({
         email,
         password,
       });

@@ -43,9 +43,7 @@ export class JsonWebTokenProvider implements JwtProvider {
     try {
       return jwt.sign(payload, this.secretKey, { expiresIn });
     } catch (error) {
-      throw new ServerError(
-        error instanceof Error ? error : new Error(String(error)),
-      );
+      throw new ServerError(new Error((error as Error).message));
     }
   }
 
@@ -78,9 +76,7 @@ export class JsonWebTokenProvider implements JwtProvider {
       if (error instanceof jwt.JsonWebTokenError) {
         throw new InvalidParamError("token", "inválido ou expirado");
       }
-      throw new ServerError(
-        error instanceof Error ? error : new Error(String(error)),
-      );
+      throw new ServerError(new Error((error as Error).message));
     }
   }
 }

@@ -3,6 +3,7 @@ import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier";
 import prettierPlugin from "eslint-plugin-prettier";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
+import unusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -32,10 +33,18 @@ export default defineConfig([
   // Regras personalizadas para TypeScript
   {
     files: ["**/*.ts"],
+    plugins: {
+      "@typescript-eslint": tseslint.plugin,
+      "unused-imports": unusedImports,
+    },
     rules: {
       // Adicione regras personalizadas aqui, por exemplo:
       "@typescript-eslint/explicit-function-return-type": "warn",
-      "@typescript-eslint/no-unused-vars": [
+      "@typescript-eslint/no-unused-vars": "off",
+
+      // Usar as regras do plugin unused-imports
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
         "error",
         {
           vars: "all",
@@ -43,10 +52,10 @@ export default defineConfig([
           ignoreRestSiblings: true,
           argsIgnorePattern: "^_",
           varsIgnorePattern: "^_",
-          // Isso faz com que importações não utilizadas também sejam detectadas
           caughtErrors: "all",
         },
       ],
+
       "@typescript-eslint/no-explicit-any": "warn",
     },
   },

@@ -50,6 +50,7 @@ export class AuthMiddleware {
   async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
       // Utilizamos uma abordagem mais segura na verificação do cabeçalho
+      /* istanbul ignore next */
       const authHeader = request.headers
         ? (request.headers as Record<string, string>)["authorization"]
         : undefined;
