@@ -19,7 +19,7 @@ model User {
   email     String   @unique
   phone     String
   birthdate DateTime
-  avatarUrl String   @default("/src/assets/images/default-avatar.png")
+  avatarUrl String   @default("/assets/images/default_avatar.jpg")
   role      UserRole @default(cliente)
   password  String
   createdAt DateTime @default(now())
