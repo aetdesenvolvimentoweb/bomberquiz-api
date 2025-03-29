@@ -35,4 +35,4 @@ export * from "./user-create-controller";
 export * from "./user-list-controller";
 
 /** Exporta o controlador para autenticação de usuários */
-export * from "./user-authenticate-controller";
+export * from "../auth/authenticate-controller";

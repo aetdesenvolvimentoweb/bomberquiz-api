@@ -30,5 +30,8 @@
  *
  */
 
+/** Exporta todos os serviços relacionados a autenticação */
+export * from "./auth";
+
 /** Exporta todos os serviços relacionados a usuários */
 export * from "./user";

@@ -1,9 +1,10 @@
 /**
  * @file user-authenticate.spec.ts
- * @description Testes unitários para o serviço UserAuthenticateService.
+ * @description Testes unitários para o serviço AuthenticateService.
  * Verifica o comportamento do serviço de autenticação de usuários em diferentes cenários.
  */
 
+import { AuthenticateService } from "@/data/services";
 import {
   User,
   USER_DEFAULT_AVATAR_URL,
@@ -13,13 +14,11 @@ import { InvalidCredentialsError } from "@/domain/errors";
 import { HashProvider, JwtProvider, LoggerProvider } from "@/domain/providers";
 import { UserRepository } from "@/domain/repositories";
 
-import { UserAuthenticateService } from "../user-authenticate";
-
 /**
- * @description Suite de testes para o UserAuthenticateService
+ * @description Suite de testes para o AuthenticateService
  * Testa a autenticação de usuários com casos de sucesso e falha
  */
-describe("UserAuthenticateService", () => {
+describe("AuthenticateService", () => {
   /**
    * @description Mock do repositório de usuários
    * Contém funções simuladas para operações de usuário
@@ -98,7 +97,7 @@ describe("UserAuthenticateService", () => {
   /**
    * @description Instância do serviço a ser testado
    */
-  let userAuthenticateService: UserAuthenticateService;
+  let authenticateService: AuthenticateService;
 
   /**
    * @description Configuração executada antes de cada teste
@@ -107,7 +106,7 @@ describe("UserAuthenticateService", () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    userAuthenticateService = new UserAuthenticateService({
+    authenticateService = new AuthenticateService({
       userRepository: mockUserRepository,
       hashProvider: mockHashProvider,
       jwtProvider: mockJwtProvider,
@@ -130,7 +129,7 @@ describe("UserAuthenticateService", () => {
       mockJwtProvider.sign.mockResolvedValue(mockAccessToken);
 
       // Act
-      const result = await userAuthenticateService.authenticate(mockAuthData);
+      const result = await authenticateService.authenticate(mockAuthData);
 
       // Assert
       expect(mockUserRepository.findByEmail).toHaveBeenCalledWith(
@@ -176,7 +175,7 @@ describe("UserAuthenticateService", () => {
 
       // Act & Assert
       await expect(
-        userAuthenticateService.authenticate(mockAuthData),
+        authenticateService.authenticate(mockAuthData),
       ).rejects.toThrow(InvalidCredentialsError);
 
       expect(mockLoggerProvider.error).toHaveBeenCalled();
@@ -195,7 +194,7 @@ describe("UserAuthenticateService", () => {
 
       // Act & Assert
       await expect(
-        userAuthenticateService.authenticate(mockAuthData),
+        authenticateService.authenticate(mockAuthData),
       ).rejects.toThrow(InvalidCredentialsError);
 
       expect(mockLoggerProvider.error).toHaveBeenCalled();
@@ -214,7 +213,7 @@ describe("UserAuthenticateService", () => {
 
       // Act & Assert
       await expect(
-        userAuthenticateService.authenticate(mockAuthData),
+        authenticateService.authenticate(mockAuthData),
       ).rejects.toThrow(testError);
 
       expect(mockLoggerProvider.error).toHaveBeenCalled();

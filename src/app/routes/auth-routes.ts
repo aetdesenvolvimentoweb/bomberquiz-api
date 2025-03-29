@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 
 import { fastifyRouteAdapter } from "@/infra/adapters";
-import { makeUserAuthenticateController } from "@/infra/factories";
+import { makeAuthenticateController } from "@/infra/factories";
 
 /**
  * @module auth-routes
@@ -42,7 +42,7 @@ export const setupAuthRoutes = (app: FastifyInstance): void => {
   // Public routes
   app.post(
     "/api/auth/login",
-    fastifyRouteAdapter(makeUserAuthenticateController()),
+    fastifyRouteAdapter(makeAuthenticateController()),
   );
 
   // Protected routes

@@ -1,17 +1,16 @@
 import { InMemoryUserRepository } from "@/data/repositories";
-import { UserAuthenticateService } from "@/data/services";
+import { AuthenticateService } from "@/data/services";
 import { UserCreateData } from "@/domain/entities";
+import { AuthResult } from "@/domain/entities";
 import { InvalidCredentialsError, MissingParamError } from "@/domain/errors";
 import { HashProvider, JwtProvider, LoggerProvider } from "@/domain/providers";
 import { UserRepository } from "@/domain/repositories";
-import { UserAuthenticationResult } from "@/domain/usecases";
+import { AuthenticateController } from "@/presentation/controllers";
 import {
   Controller,
   HttpRequest,
   HttpResponse,
 } from "@/presentation/protocols";
-
-import { UserAuthenticateController } from "../user-authenticate-controller";
 
 // Tipos e interfaces
 interface SutResponse {
@@ -48,7 +47,7 @@ const makeSut = (): SutResponse => {
   const userRepository = new InMemoryUserRepository();
 
   // Criação do serviço com as dependências mockadas
-  const userAuthenticateService = new UserAuthenticateService({
+  const authenticateService = new AuthenticateService({
     hashProvider,
     jwtProvider,
     loggerProvider,
@@ -56,8 +55,8 @@ const makeSut = (): SutResponse => {
   });
 
   // Criação do controlador (SUT)
-  const sut = new UserAuthenticateController({
-    userAuthenticateService,
+  const sut = new AuthenticateController({
+    authenticateService,
   });
 
   return { sut, userRepository, hashProvider, jwtProvider };
@@ -175,7 +174,7 @@ describe("UserAuthenticateController", () => {
     };
 
     // Act
-    const httpResponse: HttpResponse<UserAuthenticationResult> =
+    const httpResponse: HttpResponse<AuthResult> =
       await sut.handle(httpRequest);
 
     // Assert

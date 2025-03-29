@@ -1,8 +1,7 @@
-// src/main/routes/__tests__/user-route.spec.ts
 import { FastifyInstance } from "fastify";
 
 import { fastifyRouteAdapter } from "@/infra/adapters";
-import { makeUserAuthenticateController } from "@/infra/factories/controllers";
+import { makeAuthenticateController } from "@/infra/factories";
 
 import { setupAuthRoutes } from "../auth-routes";
 
@@ -22,9 +21,7 @@ describe("User Routes", () => {
 
     // Configurar mock do controller
     mockController = { handle: jest.fn() };
-    (makeUserAuthenticateController as jest.Mock).mockReturnValue(
-      mockController,
-    );
+    (makeAuthenticateController as jest.Mock).mockReturnValue(mockController);
 
     // Configurar mock do adapter
     adaptedHandler = { adapted: true };
@@ -44,7 +41,7 @@ describe("User Routes", () => {
     setupAuthRoutes(mockApp);
 
     // Verificações
-    expect(makeUserAuthenticateController).toHaveBeenCalledTimes(1);
+    expect(makeAuthenticateController).toHaveBeenCalledTimes(1);
     expect(fastifyRouteAdapter).toHaveBeenCalledWith(mockController);
     expect(mockApp.post).toHaveBeenCalledWith(
       "/api/auth/login",

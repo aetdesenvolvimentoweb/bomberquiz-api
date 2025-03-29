@@ -1,6 +1,6 @@
-import { UserAuthenticateService } from "@/data/services";
+import { AuthenticateService } from "@/data/services";
 import { LoggerProvider } from "@/domain/providers";
-import { makeUserAuthenticateService } from "@/infra/factories";
+import { makeAuthenticateService } from "@/infra/factories";
 
 describe("makeUserAuthenticateService", () => {
   it("should create and return a UserAuthenticateService instance with correct dependencies", () => {
@@ -16,10 +16,10 @@ describe("makeUserAuthenticateService", () => {
     });
 
     // Act - Executar a ação que queremos testar
-    const sut = makeUserAuthenticateService(loggerProvider);
+    const sut = makeAuthenticateService(loggerProvider);
 
     // Assert - Verificar se o resultado é o esperado
-    expect(sut).toBeInstanceOf(UserAuthenticateService);
+    expect(sut).toBeInstanceOf(AuthenticateService);
     expect(sut).toHaveProperty("authenticate");
   });
 });

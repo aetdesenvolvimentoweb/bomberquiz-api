@@ -1,6 +1,6 @@
-import { UserAuthenticateService } from "@/data/services";
+import { AuthenticateService } from "@/data/services";
+import { AuthData } from "@/domain/entities/auth";
 import { MissingParamError } from "@/domain/errors";
-import { UserAuthenticationData } from "@/domain/usecases/user/user-authenticate-usecase";
 import { handleError, ok } from "@/presentation/helpers";
 import {
   Controller,
@@ -9,35 +9,33 @@ import {
 } from "@/presentation/protocols";
 
 /**
- * @interface UserAuthenticateControllerProps
+ * @interface AuthenticateControllerProps
  * @description Props necessárias para inicializar o controller de autenticação
  */
-interface UserAuthenticateControllerProps {
+interface AuthenticateControllerProps {
   /** Caso de uso para autenticação de usuários */
-  userAuthenticateService: UserAuthenticateService;
+  authenticateService: AuthenticateService;
 }
 
 /**
  * @class UserAuthenticateController
- * @implements {Controller<UserAuthenticationData>}
+ * @implements {Controller<AuthData>}
  * @description Controller responsável por processar requisições de autenticação de usuários
  *
  * Este controller valida os dados de entrada (email e senha), invoca o caso de uso
  * de autenticação e retorna o resultado ou trata os erros apropriadamente.
  */
-export class UserAuthenticateController
-  implements Controller<UserAuthenticationData>
-{
+export class AuthenticateController implements Controller<AuthData> {
   /**
    * @constructor
-   * @param {UserAuthenticateControllerProps} props - Dependências do controller
+   * @param {AuthenticateControllerProps} props - Dependências do controller
    */
-  constructor(private readonly props: UserAuthenticateControllerProps) {}
+  constructor(private readonly props: AuthenticateControllerProps) {}
 
   /**
    * @method handle
    * @description Processa a requisição HTTP de autenticação de usuário
-   * @param {HttpRequest<UserAuthenticationData>} request - Requisição HTTP contendo email e senha
+   * @param {HttpRequest<AuthData>} request - Requisição HTTP contendo email e senha
    * @returns {Promise<HttpResponse>} Resposta HTTP com o resultado da autenticação ou erro
    *
    * @throws {MissingParamError} Quando parâmetros obrigatórios estão ausentes
@@ -53,9 +51,9 @@ export class UserAuthenticateController
    * });
    */
   public readonly handle = async (
-    request: HttpRequest<UserAuthenticationData>,
+    request: HttpRequest<AuthData>,
   ): Promise<HttpResponse> => {
-    const { userAuthenticateService } = this.props;
+    const { authenticateService } = this.props;
 
     try {
       if (!request.body) {
@@ -64,7 +62,7 @@ export class UserAuthenticateController
 
       const { email, password } = request.body;
 
-      const authResult = await userAuthenticateService.authenticate({
+      const authResult = await authenticateService.authenticate({
         email,
         password,
       });

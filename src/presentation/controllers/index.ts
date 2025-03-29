@@ -40,5 +40,8 @@
  * app.post('/api/users', adaptRoute(new UserCreateController(dependencies)));
  */
 
+/** Exporta todos os controladores relacionados à Autenticação */
+export * from "./auth";
+
 /** Exporta todos os controladores relacionados à entidade Usuário */
 export * from "./user";

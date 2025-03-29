@@ -8,5 +8,8 @@
  * @module domain/entities
  */
 
+/** Exporta todas as definições relacionadas a autenticação */
+export * from "./auth";
+
 /** Exporta todas as definições relacionadas a usuários */
 export * from "./user";

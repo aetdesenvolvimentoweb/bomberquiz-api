@@ -123,16 +123,7 @@ export class InMemoryUserRepository implements UserRepository {
    * e mantendo a consistência dos tipos retornados pelo repositório.
    */
   private mapUser(user: User): UserMapped {
-    return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      birthdate: user.birthdate,
-      avatarUrl: user.avatarUrl,
-      role: user.role,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    };
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   }
 }
