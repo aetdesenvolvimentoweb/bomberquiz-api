@@ -130,6 +130,26 @@ describe("InMemoryUserRepository", () => {
     });
   });
 
+  describe("updateAvatar method", () => {
+    it("deve atualizar o avatar de um usuário em memória com os dados fornecidos", async () => {
+      // Arrange - dados já definidos no setup
+
+      // Act
+      await repository.create(userData);
+      const user = await repository.findByEmail(userData.email);
+
+      await repository.updateAvatar({
+        id: user!.id,
+        avatarUrl: "https://www.nova_url.com",
+      });
+
+      // Assert - vamos verificar indiretamente buscando o usuário
+      const userUpdated = await repository.findByEmail(userData.email);
+      expect(userUpdated).not.toBeNull();
+      expect(userUpdated?.avatarUrl).toBe("https://www.nova_url.com");
+    });
+  });
+
   // Nova seção de testes para o método list
   describe("list method", () => {
     it("deve retornar um array vazio quando não houver usuários", async () => {
