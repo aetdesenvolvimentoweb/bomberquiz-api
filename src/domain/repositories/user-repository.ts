@@ -2,6 +2,7 @@ import {
   UserCreateUseCase,
   UserFindByEmailUseCase,
   UserListUseCase,
+  UserUpdateAvatarUseCase,
 } from "@/domain/usecases";
 
 /**
@@ -16,11 +17,13 @@ import {
  * - Criação de usuários ({@link UserCreateUseCase})
  * - Busca de usuários por e-mail ({@link UserFindByEmailUseCase})
  * - Listagem de usuários ({@link UserListUseCase})
+ * - Atualização do Avatar de usuários ({@link UserUpdateAvatarUseCase})
  *
  * @interface
  * @extends {UserCreateUseCase}
  * @extends {UserFindByEmailUseCase}
  * @extends {UserListUseCase}
+ * @extends {UserUpdateAvatarUseCase}
  *
  * @remarks
  * A implementação concreta deste repositório deve ser fornecida pela camada de
@@ -48,4 +51,5 @@ import {
  */
 export type UserRepository = UserCreateUseCase &
   UserFindByEmailUseCase &
-  UserListUseCase;
+  UserListUseCase &
+  UserUpdateAvatarUseCase;

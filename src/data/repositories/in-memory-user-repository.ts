@@ -36,6 +36,7 @@ import {
   User,
   USER_DEFAULT_AVATAR_URL,
   USER_DEFAULT_ROLE,
+  UserAvatarData,
   UserCreateData,
   UserMapped,
 } from "@/domain/entities";
@@ -107,6 +108,26 @@ export class InMemoryUserRepository implements UserRepository {
    */
   public readonly list = async (): Promise<UserMapped[]> => {
     return this.users.map((user) => this.mapUser(user));
+  };
+
+  /**
+   * Atualiza a url do avatar do usuário no sistema
+   *
+   * @returns {Promise<void>} - Promise que resolve quando a url do avatar do usuário
+   * é atualizada com sucesso
+   *
+   */
+  public readonly updateAvatar = async (
+    userAvatarData: UserAvatarData,
+  ): Promise<void> => {
+    const updateIndex = this.users.findIndex(
+      (user) => user.id === userAvatarData.id,
+    );
+
+    this.users[updateIndex] = {
+      ...this.users[updateIndex],
+      avatarUrl: userAvatarData.avatarUrl,
+    };
   };
 
   /**
