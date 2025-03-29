@@ -1,8 +1,8 @@
 /**
- * Barrel file for User controller factories
+ * Barrel file for Auth controller factories
  *
  * This file consolidates and re-exports all controller factory functions
- * related to User domain entities, making it easier to import them from
+ * related to Authentication domain entities, making it easier to import them from
  * a single location.
  *
  * @example
@@ -15,5 +15,4 @@
  * @module UserControllerFactories
  */
 
-export * from "./make-user-create-controller";
-export * from "./make-user-list-controller";
+export * from "../auth/make-user-authenticate-controller";

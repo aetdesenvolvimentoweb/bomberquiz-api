@@ -20,4 +20,5 @@
  * @module ControllerFactories
  */
 
+export * from "./auth";
 export * from "./user";

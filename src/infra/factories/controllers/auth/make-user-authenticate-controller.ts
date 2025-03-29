@@ -1,4 +1,4 @@
-import { makeUserAuthenticateService } from "@/infra/factories/services/user";
+import { makeUserAuthenticateService } from "@/infra/factories";
 import { ConsoleLogger } from "@/infra/providers";
 import { UserAuthenticateController } from "@/presentation/controllers/user";
 import { Controller } from "@/presentation/protocols";
@@ -31,6 +31,6 @@ export const makeUserAuthenticateController = (): Controller => {
   const userAuthenticateService = makeUserAuthenticateService(loggerProvider);
 
   return new UserAuthenticateController({
-    userAuthenticateUseCase: userAuthenticateService,
+    userAuthenticateService,
   });
 };

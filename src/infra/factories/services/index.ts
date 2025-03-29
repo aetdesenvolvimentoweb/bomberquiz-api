@@ -39,4 +39,5 @@
  * @see {@link ../user/make-user-create-service.ts} para detalhes de implementação da factory
  */
 
+export * from "./auth";
 export * from "./user";

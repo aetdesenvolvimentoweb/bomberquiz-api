@@ -15,9 +15,6 @@
  * - makeUserListService: Factory para criação do serviço de listagem de usuários,
  *   que configura todas as dependências necessárias como validadores, sanitizadores,
  *   repositórios e provedores.
- * - makeUserAuthenticateService: Factory para criação do serviço de autenticação de usuários,
- *   que configura todas as dependências necessárias como validadores, sanitizadores,
- *   repositórios e provedores.
  *
  * @example
  * // Importação da factory
@@ -38,9 +35,7 @@
  * @module infra/factories/services/user
  * @see {@link ./make-user-create-service.ts} para detalhes de implementação da factory
  * @see {@link ./make-user-list-service.ts} para detalhes de implementação da factory
- * @see {@link ./make-user-authenticate-service.ts} para detalhes de implementação da factory
  */
 
-export * from "./make-user-authenticate-service";
 export * from "./make-user-create-service";
 export * from "./make-user-list-service";

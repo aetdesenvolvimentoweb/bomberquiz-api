@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 
 import { fastifyRouteAdapter } from "@/infra/adapters";
-import { makeUserAuthenticateController } from "@/infra/factories/controllers";
+import { makeUserAuthenticateController } from "@/infra/factories";
 
 /**
  * @module auth-routes
