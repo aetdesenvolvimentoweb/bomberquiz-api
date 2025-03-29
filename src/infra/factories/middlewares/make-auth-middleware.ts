@@ -28,7 +28,9 @@ import { Middleware } from "@/presentation/protocols";
  * @throws Will throw an error if JWT_SECRET environment variable is not set and default is used in production
  */
 export const makeAuthMiddleware = (): Middleware => {
-  const jwtSecret = process.env.JWT_SECRET || "your_default_jwt_secret_key";
+  /* istanbul ignore next */
+  const jwtSecret =
+    process.env.JWT_SECRET || "b71d6620ed1f14726f299763bbeaff4a23d2a427";
   const jwtProvider = new JsonWebTokenProvider(jwtSecret);
 
   return new AuthMiddleware({

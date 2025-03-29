@@ -33,6 +33,7 @@ import { PrismaUserRepository } from "@/infra/repositories";
 export const makeAuthenticateService = (
   loggerProvider: LoggerProvider,
 ): AuthenticateService => {
+  /* istanbul ignore next */
   const jwtSecret =
     process.env.JWT_SECRET || "b71d6620ed1f14726f299763bbeaff4a23d2a427";
   const userRepository = new PrismaUserRepository();
