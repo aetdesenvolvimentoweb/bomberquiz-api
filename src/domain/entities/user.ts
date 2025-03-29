@@ -58,7 +58,7 @@ export type UserCreateData = Omit<
  * @property {string} id - Identificador único do usuário
  * @property {string} avatarUrl - Nova URL da imagem de avatar
  */
-export type UserUpdateAvatarData = {
+export type UserAvatarData = {
   id: string;
   avatarUrl: string;
 };
