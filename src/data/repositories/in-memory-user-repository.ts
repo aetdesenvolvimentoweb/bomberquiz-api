@@ -97,6 +97,24 @@ export class InMemoryUserRepository implements UserRepository {
   };
 
   /**
+   * Busca um usuário pelo id
+   *
+   * @param {string} id - Id do usuário a ser encontrado
+   * @returns {Promise<User | null>} - Promise que resolve para o usuário encontrado sem o password ou null caso não exista
+   *
+   * @remarks
+   */
+  public readonly findById = async (id: string): Promise<UserMapped | null> => {
+    const user = this.users.find((user) => user.id === id);
+
+    if (!user) {
+      return null;
+    }
+
+    return this.mapUser(user);
+  };
+
+  /**
    * Lista todos os usuários do sistema
    *
    * @returns {Promise<UserMapped[]>} - Promise que resolve para um array de usuários mapeados

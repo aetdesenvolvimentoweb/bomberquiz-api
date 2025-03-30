@@ -39,7 +39,13 @@
  * const users = await userRepository.list();
  */
 
-import { User, UserCreateData, UserMapped, UserRole } from "@/domain/entities";
+import {
+  User,
+  UserAvatarData,
+  UserCreateData,
+  UserMapped,
+  UserRole,
+} from "@/domain/entities";
 import { UserRepository } from "@/domain/repositories";
 
 import { prismaClient } from "../adapters/prisma-client-adapter";
@@ -120,6 +126,35 @@ export class PrismaUserRepository implements UserRepository {
   };
 
   /**
+   * Busca um usuário pelo id
+   *
+   * @param {string} id - Id do usuário a ser encontrado
+   * @returns {Promise<UserMapped | null>} Promise que resolve para o usuário encontrado sem o password ou null
+   *
+   * @example
+   * const user = await userRepository.findById('any_id');
+   * if (user) {
+   *   console.log(`Usuário encontrado: ${user.name}`);
+   * } else {
+   *   console.log('Usuário não encontrado');
+   * }
+   */
+  public readonly findById = async (id: string): Promise<UserMapped | null> => {
+    const user = await prismaClient.user.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    if (user) {
+      const { password, ...userWithoutPassword } = user;
+      return { ...userWithoutPassword, role: user.role as UserRole };
+    }
+
+    return null;
+  };
+
+  /**
    * Lista todos os usuários do sistema
    *
    * @returns {Promise<UserMapped[]>} Promise que resolve para um array de usuários mapeados
@@ -135,5 +170,26 @@ export class PrismaUserRepository implements UserRepository {
     return users.map((user) =>
       this.userMap({ ...user, role: user.role as UserRole }),
     );
+  };
+
+  /**
+   * Atualiza a url do avatar do usuário no banco de dados
+   *
+   * @param {UserAvatarData} userAvatarData - Dados do avatar a ser atualizado
+   * @returns {Promise<void>} Promise que resolve quando o avatar for atualizado
+   *
+   * @example
+   * await userRepository.updateAvatar({
+   *   id: 'any_id',
+   *   avatarUrl: 'https://www.teste.com',
+   * });
+   */
+  public readonly updateAvatar = async (
+    userAvatarData: UserAvatarData,
+  ): Promise<void> => {
+    await prismaClient.user.update({
+      where: { id: userAvatarData.id },
+      data: { avatarUrl: userAvatarData.avatarUrl },
+    });
   };
 }

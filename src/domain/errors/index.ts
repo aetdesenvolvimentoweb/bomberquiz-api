@@ -40,5 +40,7 @@ export * from "./invalid-credentials-error";
 export * from "./invalid-param-error";
 /** Erro para recursos duplicados (HTTP 409) */
 export * from "./duplicate-resource-error";
+/** Erro para dados não encontrados (HTTP 404) */
+export * from "./unregistered-param-error";
 /** Erro para falhas internas do servidor (HTTP 500) */
 export * from "./server-error";

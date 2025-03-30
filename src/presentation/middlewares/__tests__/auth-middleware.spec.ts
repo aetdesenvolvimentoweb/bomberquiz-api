@@ -33,7 +33,7 @@ describe("AuthMiddleware", () => {
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body.errorMessage).toBe(
-      "Parâmetro obrigatório não informado: token de autenticação",
+      "Parâmetro obrigatório não informado: Token de autenticação",
     );
   });
 

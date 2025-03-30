@@ -89,7 +89,7 @@ describe("UserCreateController", () => {
       expect(httpResponse.statusCode).toBe(400);
       expect(httpResponse.body.success).toBe(false);
       expect(httpResponse.body.errorMessage).toBe(
-        "Parâmetro obrigatório não informado: corpo da requisição não informado",
+        "Parâmetro obrigatório não informado: Corpo da requisição não informado",
       );
 
       // Verify service was not called

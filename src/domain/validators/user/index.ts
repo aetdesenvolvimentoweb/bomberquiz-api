@@ -46,6 +46,7 @@
  */
 
 export * from "./user-avatar-data-validator";
+export * from "./user-avatar-url-validator";
 export * from "./user-birthdate-validator";
 export * from "./user-create-data-validator";
 export * from "./user-email-validator";

@@ -1,6 +1,7 @@
 import {
   UserCreateUseCase,
   UserFindByEmailUseCase,
+  UserFindByIdUseCase,
   UserListUseCase,
   UserUpdateAvatarUseCase,
 } from "@/domain/usecases";
@@ -51,5 +52,6 @@ import {
  */
 export type UserRepository = UserCreateUseCase &
   UserFindByEmailUseCase &
+  UserFindByIdUseCase &
   UserListUseCase &
   UserUpdateAvatarUseCase;

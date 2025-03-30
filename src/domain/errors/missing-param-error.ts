@@ -38,6 +38,7 @@ export class MissingParamError extends ApplicationError {
    * @param {string} param - Nome do parâmetro que está faltando
    */
   constructor(param: string) {
-    super(`Parâmetro obrigatório não informado: ${param}`, 400);
+    const capitalizedParam = param.charAt(0).toUpperCase() + param.slice(1);
+    super(`Parâmetro obrigatório não informado: ${capitalizedParam}`, 400);
   }
 }

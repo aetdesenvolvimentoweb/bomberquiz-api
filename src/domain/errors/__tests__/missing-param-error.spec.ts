@@ -17,7 +17,7 @@ describe("MissingParamError", () => {
   describe("constructor", () => {
     it("deve criar uma instância com a mensagem formatada corretamente", () => {
       // Arrange
-      const paramName = "email";
+      const paramName = "Email";
 
       // Act
       const error = new MissingParamError(paramName);
@@ -56,7 +56,7 @@ describe("MissingParamError", () => {
   describe("uso em validações", () => {
     it("deve ser lançado e capturado corretamente", () => {
       // Arrange
-      const paramName = "idade";
+      const paramName = "Idade";
       let caughtError: unknown = null;
 
       // Act
@@ -93,8 +93,8 @@ describe("MissingParamError", () => {
       const error2 = new MissingParamError("senha");
 
       // Assert
-      expect(error1.message).toBe("Parâmetro obrigatório não informado: email");
-      expect(error2.message).toBe("Parâmetro obrigatório não informado: senha");
+      expect(error1.message).toBe("Parâmetro obrigatório não informado: Email");
+      expect(error2.message).toBe("Parâmetro obrigatório não informado: Senha");
     });
   });
 });

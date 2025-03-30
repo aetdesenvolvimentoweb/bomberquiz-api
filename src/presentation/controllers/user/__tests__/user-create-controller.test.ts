@@ -26,6 +26,8 @@ describe("UserCreateController (Integration)", () => {
     create: jest.fn(),
     findByEmail: jest.fn(),
     list: jest.fn(),
+    findById: jest.fn(),
+    updateAvatar: jest.fn(),
   };
 
   const mockUserCreateDataSanitizer: jest.Mocked<UserCreateDataSanitizerUseCase> =
@@ -147,7 +149,7 @@ describe("UserCreateController (Integration)", () => {
       expect(httpResponse.statusCode).toBe(400);
       expect(httpResponse.body.success).toBe(false);
       expect(httpResponse.body.errorMessage).toBe(
-        "Parâmetro obrigatório não informado: corpo da requisição não informado",
+        "Parâmetro obrigatório não informado: Corpo da requisição não informado",
       );
 
       // Verificar que o serviço não foi chamado

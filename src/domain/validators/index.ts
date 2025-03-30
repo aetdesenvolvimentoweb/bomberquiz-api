@@ -31,4 +31,5 @@
  *
  */
 
+export * from "./id-validator";
 export * from "./user";
