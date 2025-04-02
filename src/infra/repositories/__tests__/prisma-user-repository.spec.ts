@@ -101,6 +101,42 @@ describe("PrismaUserRepository", () => {
     });
   });
 
+  describe("findById method", () => {
+    it("deve retornar o usuário quando encontrado pelo Id", async () => {
+      // Arrange
+      prismaMock.user.findFirst.mockResolvedValue(mockUser);
+
+      // Act
+      const result = await repository.findById(mockUser.id);
+
+      // Assert
+      expect(prismaMock.user.findFirst).toHaveBeenCalledTimes(1);
+      expect(prismaMock.user.findFirst).toHaveBeenCalledWith({
+        where: { id: mockUser.id },
+      });
+      expect(result).toEqual(
+        expect.objectContaining({
+          id: mockUser.id,
+          name: mockUser.name,
+          email: mockUser.email,
+          role: mockUser.role,
+        }),
+      );
+    });
+
+    it("deve retornar null quando usuário não for encontrado", async () => {
+      // Arrange
+      prismaMock.user.findFirst.mockResolvedValue(null);
+
+      // Act
+      const result = await repository.findById("any_id");
+
+      // Assert
+      expect(prismaMock.user.findFirst).toHaveBeenCalledTimes(1);
+      expect(result).toBeNull();
+    });
+  });
+
   describe("list method", () => {
     it("deve retornar uma lista vazia quando não houver usuários", async () => {
       // Arrange
@@ -171,6 +207,29 @@ describe("PrismaUserRepository", () => {
       // A senha não deve estar presente nos objetos mapeados
       result.forEach((user) => {
         expect(user).not.toHaveProperty("password");
+      });
+    });
+  });
+
+  describe("updateAvatar method", () => {
+    it("deve atualizar o avatar do usuário", async () => {
+      // Arrange
+      prismaMock.user.update.mockResolvedValue({
+        ...mockUser,
+        avatarUrl: "nova_url",
+      });
+
+      // Act
+      await repository.updateAvatar({
+        id: mockUser.id,
+        avatarUrl: "nova_url",
+      });
+
+      // Assert
+      expect(prismaMock.user.update).toHaveBeenCalledTimes(1);
+      expect(prismaMock.user.update).toHaveBeenCalledWith({
+        where: { id: mockUser.id },
+        data: { avatarUrl: "nova_url" },
       });
     });
   });
