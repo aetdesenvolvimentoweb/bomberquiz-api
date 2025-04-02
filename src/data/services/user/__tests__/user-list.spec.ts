@@ -53,6 +53,8 @@ describe("UserListService", () => {
       list: jest.fn(),
       create: jest.fn(),
       findByEmail: jest.fn(),
+      findById: jest.fn(),
+      updateAvatar: jest.fn(),
     } as jest.Mocked<UserRepository>;
 
     loggerProviderMock = {

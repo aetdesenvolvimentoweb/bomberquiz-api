@@ -27,6 +27,8 @@ describe("AuthenticateService", () => {
     findByEmail: jest.fn(),
     create: jest.fn(),
     list: jest.fn(),
+    findById: jest.fn(),
+    updateAvatar: jest.fn(),
   };
 
   /**
