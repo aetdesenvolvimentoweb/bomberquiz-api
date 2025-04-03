@@ -1,6 +1,6 @@
 import { UserCreateService } from "@/data/services";
 import { LoggerProvider } from "@/domain/providers";
-import { makeUserCreateService } from "@/infra/factories/services/user/make-user-create-service";
+import { makeUserCreateService } from "@/infra/factories";
 
 describe("makeUserCreateService", () => {
   it("should create and return a UserCreateService instance", () => {

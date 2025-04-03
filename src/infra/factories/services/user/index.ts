@@ -15,6 +15,9 @@
  * - makeUserListService: Factory para criação do serviço de listagem de usuários,
  *   que configura todas as dependências necessárias como validadores, sanitizadores,
  *   repositórios e provedores.
+ * - makeUserUpdateAvatarService: Factory para criação do serviço de atualização do avatar do usuário,
+ *   que configura todas as dependências necessárias como validadores, sanitizadores,
+ *   repositórios e provedores.
  *
  * @example
  * // Importação da factory
@@ -35,7 +38,9 @@
  * @module infra/factories/services/user
  * @see {@link ./make-user-create-service.ts} para detalhes de implementação da factory
  * @see {@link ./make-user-list-service.ts} para detalhes de implementação da factory
+ * @see {@link ./make-user-update-avatar-service.ts} para detalhes de implementação da factory
  */
 
 export * from "./make-user-create-service";
 export * from "./make-user-list-service";
+export * from "./make-user-update-avatar-service";
