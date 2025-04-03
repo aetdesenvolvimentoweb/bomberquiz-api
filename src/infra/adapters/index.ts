@@ -31,6 +31,7 @@ export * from "./date-fns-birthdate-validator-adapter";
 export * from "./fastify-middleware-adapter";
 export * from "./fastify-route-adapter";
 export * from "./libphonenumber-validator-adapter";
+export * from "./mongo-id-validator-adapter";
 export * from "./password-validator-adapter";
 export * from "./prisma-client-adapter";
 export * from "./validator-email-validator-adapter";
