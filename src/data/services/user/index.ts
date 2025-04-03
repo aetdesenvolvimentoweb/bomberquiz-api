@@ -28,3 +28,6 @@ export * from "./user-create";
 
 /** Exporta o serviço de listagem de usuários */
 export * from "./user-list";
+
+/** Exporta o serviço de atualização do avatar dos usuários */
+export * from "./user-update-avatar";
