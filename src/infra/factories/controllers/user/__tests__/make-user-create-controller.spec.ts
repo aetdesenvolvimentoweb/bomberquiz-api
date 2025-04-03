@@ -2,7 +2,7 @@ import { makeUserCreateController } from "@/infra/factories";
 import { UserCreateController } from "@/presentation/controllers";
 
 describe("makeUserCreateController", () => {
-  it("should create and return a UserCreateController instance with correct dependencies", () => {
+  it("should create and return an UserCreateController instance with correct dependencies", () => {
     // Arrange - Preparar tudo o que é necessário para o teste
     // Neste caso, não precisamos de preparação especial
 

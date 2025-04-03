@@ -17,3 +17,4 @@
 
 export * from "./make-user-create-controller";
 export * from "./make-user-list-controller";
+export * from "./make-user-update-avatar-controller";
