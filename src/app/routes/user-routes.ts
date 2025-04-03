@@ -4,11 +4,12 @@ import {
   fastifyMiddlewareAdapter,
   fastifyRouteAdapter,
 } from "@/infra/adapters";
-import { makeAuthMiddleware } from "@/infra/factories";
 import {
+  makeAuthMiddleware,
   makeUserCreateController,
   makeUserListController,
-} from "@/infra/factories/controllers";
+  makeUserUpdateAvatarController,
+} from "@/infra/factories";
 
 /**
  * @module user-routes
@@ -56,5 +57,10 @@ export const setupUserRoutes = (app: FastifyInstance): void => {
     "/api/users",
     { preHandler: [fastifyMiddlewareAdapter(makeAuthMiddleware())] },
     fastifyRouteAdapter(makeUserListController()),
+  );
+  app.patch(
+    "/api/users/avatar",
+    { preHandler: [fastifyMiddlewareAdapter(makeAuthMiddleware())] },
+    fastifyRouteAdapter(makeUserUpdateAvatarController()),
   );
 };
