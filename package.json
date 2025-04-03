@@ -37,6 +37,7 @@
     "jsdom": "^26.0.0",
     "libphonenumber-js": "^1.12.6",
     "module-alias": "^2.2.3",
+    "mongodb": "^6.15.0",
     "password-validator": "^5.3.0",
     "validator": "^13.12.0"
   },
