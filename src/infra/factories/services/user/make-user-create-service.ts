@@ -14,36 +14,6 @@ import { Argon2Hash, ConsoleLogger } from "@/infra/providers";
 import { PrismaUserRepository } from "@/infra/repositories";
 import { DOMPurifyXssSanitizer } from "@/infra/sanitizers";
 
-/**
- * Factory function that creates and configures a UserCreateService with all necessary dependencies.
- *
- * This factory handles the complex dependency graph required by the UserCreateService, including:
- * - Security providers (password hashing, XSS sanitization)
- * - Data validators (birthdate, email, password, phone)
- * - Domain-specific validators (unique email)
- * - Data repositories
- * - Data sanitizers
- *
- * Using this factory centralizes the creation logic and simplifies service instantiation
- * throughout the application.
- *
- * @param {LoggerProvider} loggerProvider - The logger implementation to be injected into the service
- * @returns {UserCreateService} A fully configured UserCreateService instance ready for use
- *
- * @example
- * // Create a user service with console logging
- * const logger = new ConsoleLogger();
- * const userService = makeUserCreateService(logger);
- *
- * // Use the service to create a new user
- * await userService.create({
- *   name: "John Doe",
- *   email: "john@example.com",
- *   password: "SecurePassword123!",
- *   phone: "+1234567890",
- *   birthdate: new Date("1990-01-01")
- * });
- */
 export const makeUserCreateService = (): UserCreateService => {
   const hashProvider = new Argon2Hash();
   const loggerProvider = new ConsoleLogger();

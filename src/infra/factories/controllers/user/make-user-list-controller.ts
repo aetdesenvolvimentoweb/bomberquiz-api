@@ -1,5 +1,4 @@
 import { makeUserListService } from "@/infra/factories";
-import { ConsoleLogger } from "@/infra/providers";
 import { UserListController } from "@/presentation/controllers";
 import { Controller } from "@/presentation/protocols";
 
@@ -8,7 +7,6 @@ import { Controller } from "@/presentation/protocols";
  *
  * This factory encapsulates the creation logic for the UserListController,
  * instantiating all required dependencies:
- * - ConsoleLogger as the logging provider
  * - UserListService (via its own factory)
  *
  * The factory pattern is used to abstract the complexity of object creation
@@ -23,8 +21,7 @@ import { Controller } from "@/presentation/protocols";
  * app.get('/users', adaptRoute(userListController));
  */
 export const makeUserListController = (): Controller => {
-  const loggerProvider = new ConsoleLogger();
-  const userListService = makeUserListService(loggerProvider);
+  const userListService = makeUserListService();
   return new UserListController({
     userListService,
   });

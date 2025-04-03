@@ -1,5 +1,4 @@
 import { makeUserCreateService } from "@/infra/factories";
-import { ConsoleLogger } from "@/infra/providers";
 import { UserCreateController } from "@/presentation/controllers";
 import { Controller } from "@/presentation/protocols";
 
@@ -8,7 +7,6 @@ import { Controller } from "@/presentation/protocols";
  *
  * This factory encapsulates the creation logic for the UserCreateController,
  * instantiating all required dependencies:
- * - ConsoleLogger as the logging provider
  * - UserCreateService (via its own factory)
  *
  * The factory pattern is used to abstract the complexity of object creation
@@ -23,8 +21,7 @@ import { Controller } from "@/presentation/protocols";
  * app.post('/users', adaptRoute(userCreateController));
  */
 export const makeUserCreateController = (): Controller => {
-  const loggerProvider = new ConsoleLogger();
-  const userCreateService = makeUserCreateService(loggerProvider);
+  const userCreateService = makeUserCreateService();
   return new UserCreateController({
     userCreateService,
   });
