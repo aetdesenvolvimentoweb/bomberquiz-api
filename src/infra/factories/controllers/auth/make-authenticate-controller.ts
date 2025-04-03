@@ -1,6 +1,6 @@
 import { makeAuthenticateService } from "@/infra/factories";
 import { ConsoleLogger } from "@/infra/providers";
-import { AuthenticateController } from "@/presentation/controllers/user";
+import { AuthenticateController } from "@/presentation/controllers";
 import { Controller } from "@/presentation/protocols";
 
 /**

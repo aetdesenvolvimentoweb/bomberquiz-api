@@ -34,5 +34,5 @@ export * from "./user-create-controller";
 /** Exporta o controlador para listagem de usuários */
 export * from "./user-list-controller";
 
-/** Exporta o controlador para autenticação de usuários */
-export * from "../auth/authenticate-controller";
+/** Exporta o controlador para atualização do avatar do usuário */
+export * from "./user-update-avatar-controller";
