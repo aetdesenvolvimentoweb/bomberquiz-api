@@ -1,5 +1,5 @@
 import { UserListService } from "@/data/services";
-import { LoggerProvider } from "@/domain/providers";
+import { ConsoleLogger } from "@/infra/providers";
 import { PrismaUserRepository } from "@/infra/repositories";
 
 /**
@@ -24,9 +24,8 @@ import { PrismaUserRepository } from "@/infra/repositories";
  * // Use the service to list users
  * const users = await userService.list();
  */
-export const makeUserListService = (
-  loggerProvider: LoggerProvider,
-): UserListService => {
+export const makeUserListService = (): UserListService => {
+  const loggerProvider = new ConsoleLogger();
   const userRepository = new PrismaUserRepository();
   return new UserListService({ userRepository, loggerProvider });
 };

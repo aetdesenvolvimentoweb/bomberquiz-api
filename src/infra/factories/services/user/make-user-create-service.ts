@@ -4,14 +4,13 @@ import {
   UserCreateDataValidator,
   UserUniqueEmailValidator,
 } from "@/data/validators";
-import { LoggerProvider } from "@/domain/providers";
 import {
   DateFnsBirthdateValidatorAdapter,
   LibphonenumberPhoneValidator,
   PasswordValidatorAdapter,
   ValidatorEmailValidatorAdapter,
 } from "@/infra/adapters";
-import { Argon2Hash } from "@/infra/providers";
+import { Argon2Hash, ConsoleLogger } from "@/infra/providers";
 import { PrismaUserRepository } from "@/infra/repositories";
 import { DOMPurifyXssSanitizer } from "@/infra/sanitizers";
 
@@ -45,10 +44,9 @@ import { DOMPurifyXssSanitizer } from "@/infra/sanitizers";
  *   birthdate: new Date("1990-01-01")
  * });
  */
-export const makeUserCreateService = (
-  loggerProvider: LoggerProvider,
-): UserCreateService => {
+export const makeUserCreateService = (): UserCreateService => {
   const hashProvider = new Argon2Hash();
+  const loggerProvider = new ConsoleLogger();
   const xssSanitizer = new DOMPurifyXssSanitizer();
   const userCreateDataSanitizer = new UserCreateDataSanitizer(xssSanitizer);
   const userRepository = new PrismaUserRepository();
